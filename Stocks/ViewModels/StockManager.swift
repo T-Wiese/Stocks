@@ -17,10 +17,8 @@ class StockManager: ObservableObject {
     func fetchStocks() {
         error = nil
         loading = true
+        self.updateStocks(stockList: self.fetcher.fetchStocksFromURL(urlString: Endpoints.prod))
 
-        DispatchQueue.global().asyncAfter(deadline: .now() + 4) {
-            self.updateStocks(stockList: self.fetcher.fetchStocksFromURL(urlString: Endpoints.prod))
-        }
     }
     
     private func updateStocks(stockList: [Stock]) {
